@@ -3,12 +3,44 @@ package com.sunrise.dental.ui;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class DashboardFrame extends JFrame {
 
     private final int userId;
     private final String username;
     private final String role;
+
+    // =========================================================
+    // COLOURS
+    // =========================================================
+
+    private final Color PRIMARY_COLOR =
+            new Color(34, 93, 120);
+
+    private final Color PRIMARY_LIGHT =
+            new Color(225, 240, 246);
+
+    private final Color BACKGROUND_COLOR =
+            new Color(245, 249, 252);
+
+    private final Color CARD_COLOR =
+            Color.WHITE;
+
+    private final Color TEXT_COLOR =
+            new Color(35, 45, 50);
+
+    private final Color SECONDARY_TEXT =
+            new Color(95, 105, 110);
+
+    private final Color BORDER_COLOR =
+            new Color(210, 220, 225);
+
+
+    // =========================================================
+    // CONSTRUCTOR
+    // =========================================================
 
     public DashboardFrame(
             int userId,
@@ -25,8 +57,8 @@ public class DashboardFrame extends JFrame {
         );
 
         setSize(
-                1100,
-                700
+                1150,
+                720
         );
 
         setLocationRelativeTo(null);
@@ -51,11 +83,7 @@ public class DashboardFrame extends JFrame {
                 );
 
         mainPanel.setBackground(
-                new Color(
-                        245,
-                        249,
-                        252
-                )
+                BACKGROUND_COLOR
         );
 
 
@@ -69,26 +97,39 @@ public class DashboardFrame extends JFrame {
                 );
 
         headerPanel.setBackground(
-                new Color(
-                        34,
-                        93,
-                        120
-                )
+                PRIMARY_COLOR
         );
 
         headerPanel.setBorder(
                 new EmptyBorder(
-                        20,
-                        30,
-                        20,
-                        30
+                        22,
+                        35,
+                        22,
+                        35
                 )
         );
 
 
+        // -----------------------------------------------------
+        // CLINIC TITLE
+        // -----------------------------------------------------
+
+        JPanel titlePanel =
+                new JPanel(
+                        new GridLayout(
+                                2,
+                                1,
+                                0,
+                                5
+                        )
+                );
+
+        titlePanel.setOpaque(false);
+
+
         JLabel clinicLabel =
                 new JLabel(
-                        "SUNRISE DENTAL CLINIC"
+                        "Sunrise Dental Clinic"
                 );
 
         clinicLabel.setForeground(
@@ -99,7 +140,7 @@ public class DashboardFrame extends JFrame {
                 new Font(
                         "SansSerif",
                         Font.BOLD,
-                        26
+                        27
                 )
         );
 
@@ -110,7 +151,7 @@ public class DashboardFrame extends JFrame {
                 );
 
         subtitleLabel.setForeground(
-                Color.WHITE
+                PRIMARY_LIGHT
         );
 
         subtitleLabel.setFont(
@@ -122,16 +163,6 @@ public class DashboardFrame extends JFrame {
         );
 
 
-        JPanel titlePanel =
-                new JPanel(
-                        new GridLayout(
-                                2,
-                                1
-                        )
-                );
-
-        titlePanel.setOpaque(false);
-
         titlePanel.add(
                 clinicLabel
         );
@@ -140,21 +171,24 @@ public class DashboardFrame extends JFrame {
                 subtitleLabel
         );
 
+
         headerPanel.add(
                 titlePanel,
                 BorderLayout.WEST
         );
 
 
-        // =====================================================
+        // -----------------------------------------------------
         // USER INFORMATION
-        // =====================================================
+        // -----------------------------------------------------
 
         JPanel userPanel =
                 new JPanel(
                         new GridLayout(
                                 2,
-                                1
+                                1,
+                                0,
+                                4
                         )
                 );
 
@@ -189,7 +223,7 @@ public class DashboardFrame extends JFrame {
                 );
 
         roleLabel.setForeground(
-                Color.WHITE
+                PRIMARY_LIGHT
         );
 
         roleLabel.setHorizontalAlignment(
@@ -213,6 +247,7 @@ public class DashboardFrame extends JFrame {
                 roleLabel
         );
 
+
         headerPanel.add(
                 userPanel,
                 BorderLayout.EAST
@@ -226,7 +261,7 @@ public class DashboardFrame extends JFrame {
 
 
         // =====================================================
-        // CENTER CONTENT
+        // MAIN CONTENT
         // =====================================================
 
         JPanel contentPanel =
@@ -234,16 +269,30 @@ public class DashboardFrame extends JFrame {
                         new BorderLayout()
                 );
 
-        contentPanel.setOpaque(false);
+        contentPanel.setBackground(
+                BACKGROUND_COLOR
+        );
 
         contentPanel.setBorder(
                 new EmptyBorder(
-                        30,
+                        25,
                         40,
                         20,
                         40
                 )
         );
+
+
+        // =====================================================
+        // DASHBOARD TITLE
+        // =====================================================
+
+        JPanel dashboardTitlePanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        dashboardTitlePanel.setOpaque(false);
 
 
         JLabel dashboardLabel =
@@ -260,11 +309,57 @@ public class DashboardFrame extends JFrame {
         );
 
         dashboardLabel.setForeground(
-                Color.BLACK
+                TEXT_COLOR
         );
 
+
+        JLabel dashboardDescription =
+                new JLabel(
+                        "Select an option below to manage clinic operations."
+                );
+
+        dashboardDescription.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        14
+                )
+        );
+
+        dashboardDescription.setForeground(
+                SECONDARY_TEXT
+        );
+
+
+        JPanel titleText =
+                new JPanel(
+                        new GridLayout(
+                                2,
+                                1,
+                                0,
+                                4
+                        )
+                );
+
+        titleText.setOpaque(false);
+
+        titleText.add(
+                dashboardLabel
+        );
+
+        titleText.add(
+                dashboardDescription
+        );
+
+
+        dashboardTitlePanel.add(
+                titleText,
+                BorderLayout.WEST
+        );
+
+
         contentPanel.add(
-                dashboardLabel,
+                dashboardTitlePanel,
                 BorderLayout.NORTH
         );
 
@@ -278,8 +373,8 @@ public class DashboardFrame extends JFrame {
                         new GridLayout(
                                 2,
                                 4,
-                                20,
-                                20
+                                18,
+                                18
                         )
                 );
 
@@ -287,9 +382,9 @@ public class DashboardFrame extends JFrame {
 
         menuPanel.setBorder(
                 new EmptyBorder(
-                        30,
+                        25,
                         0,
-                        30,
+                        15,
                         0
                 )
         );
@@ -301,8 +396,9 @@ public class DashboardFrame extends JFrame {
 
         JButton patientButton =
                 createMenuButton(
-                        "PATIENT MANAGEMENT",
-                        "Register and manage patients"
+                        "Patient Management",
+                        "Register and manage patients",
+                        "P"
                 );
 
         patientButton.addActionListener(
@@ -311,13 +407,14 @@ public class DashboardFrame extends JFrame {
 
 
         // =====================================================
-        // APPOINTMENTS
+        // APPOINTMENT MANAGEMENT
         // =====================================================
 
         JButton appointmentButton =
                 createMenuButton(
-                        "APPOINTMENTS",
-                        "Register and search appointments"
+                        "Appointment Management",
+                        "Register and search appointments",
+                        "A"
                 );
 
         appointmentButton.addActionListener(
@@ -331,8 +428,9 @@ public class DashboardFrame extends JFrame {
 
         JButton dentistButton =
                 createMenuButton(
-                        "DENTISTS",
-                        "View and manage clinic dentists"
+                        "Dentists",
+                        "View and manage clinic dentists",
+                        "D"
                 );
 
         dentistButton.addActionListener(
@@ -346,8 +444,9 @@ public class DashboardFrame extends JFrame {
 
         JButton treatmentButton =
                 createMenuButton(
-                        "TREATMENTS",
-                        "View and manage treatments"
+                        "Treatments",
+                        "View and manage dental treatments",
+                        "T"
                 );
 
         treatmentButton.addActionListener(
@@ -361,8 +460,9 @@ public class DashboardFrame extends JFrame {
 
         JButton billingButton =
                 createMenuButton(
-                        "BILLING",
-                        "Calculate and print patient bills"
+                        "Billing",
+                        "Calculate and print patient bills",
+                        "B"
                 );
 
         billingButton.addActionListener(
@@ -376,8 +476,9 @@ public class DashboardFrame extends JFrame {
 
         JButton reportsButton =
                 createMenuButton(
-                        "REPORTS",
-                        "View clinic reports"
+                        "Reports",
+                        "View clinic reports",
+                        "R"
                 );
 
         reportsButton.addActionListener(
@@ -391,8 +492,9 @@ public class DashboardFrame extends JFrame {
 
         JButton helpButton =
                 createMenuButton(
-                        "HELP",
-                        "System usage instructions"
+                        "Help",
+                        "System usage instructions",
+                        "?"
                 );
 
         helpButton.addActionListener(
@@ -406,8 +508,9 @@ public class DashboardFrame extends JFrame {
 
         JButton logoutButton =
                 createMenuButton(
-                        "LOGOUT",
-                        "Return to login screen"
+                        "Logout",
+                        "Return to login screen",
+                        "L"
                 );
 
         logoutButton.addActionListener(
@@ -457,6 +560,7 @@ public class DashboardFrame extends JFrame {
                 BorderLayout.CENTER
         );
 
+
         mainPanel.add(
                 contentPanel,
                 BorderLayout.CENTER
@@ -469,9 +573,7 @@ public class DashboardFrame extends JFrame {
 
         JPanel footerPanel =
                 new JPanel(
-                        new FlowLayout(
-                                FlowLayout.CENTER
-                        )
+                        new BorderLayout()
                 );
 
         footerPanel.setBackground(
@@ -482,14 +584,40 @@ public class DashboardFrame extends JFrame {
                 )
         );
 
+        footerPanel.setBorder(
+                new EmptyBorder(
+                        10,
+                        30,
+                        10,
+                        30
+                )
+        );
+
 
         JLabel footerLabel =
                 new JLabel(
-                        "Sunrise Dental Clinic | "
-                                + "Appointment & Patient Management System"
+                        "Sunrise Dental Clinic"
                 );
 
         footerLabel.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        12
+                )
+        );
+
+        footerLabel.setForeground(
+                PRIMARY_COLOR
+        );
+
+
+        JLabel footerRight =
+                new JLabel(
+                        "Appointment & Patient Management System"
+                );
+
+        footerRight.setFont(
                 new Font(
                         "SansSerif",
                         Font.PLAIN,
@@ -497,19 +625,31 @@ public class DashboardFrame extends JFrame {
                 )
         );
 
-        footerLabel.setForeground(
-                Color.BLACK
+        footerRight.setForeground(
+                SECONDARY_TEXT
+        );
+
+
+        footerPanel.add(
+                footerLabel,
+                BorderLayout.WEST
         );
 
         footerPanel.add(
-                footerLabel
+                footerRight,
+                BorderLayout.EAST
         );
+
 
         mainPanel.add(
                 footerPanel,
                 BorderLayout.SOUTH
         );
 
+
+        // =====================================================
+        // SET CONTENT
+        // =====================================================
 
         setContentPane(
                 mainPanel
@@ -523,22 +663,26 @@ public class DashboardFrame extends JFrame {
 
     private JButton createMenuButton(
             String title,
-            String description
+            String description,
+            String iconText
     ) {
 
         JButton button =
                 new JButton();
 
         button.setLayout(
-                new BorderLayout()
+                new BorderLayout(
+                        15,
+                        0
+                )
         );
 
         button.setBackground(
-                Color.WHITE
+                CARD_COLOR
         );
 
         button.setForeground(
-                Color.BLACK
+                TEXT_COLOR
         );
 
         button.setFocusPainted(
@@ -559,21 +703,85 @@ public class DashboardFrame extends JFrame {
         button.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
-                                new Color(
-                                        160,
-                                        175,
-                                        185
-                                ),
+                                BORDER_COLOR,
                                 1
                         ),
                         new EmptyBorder(
-                                15,
-                                15,
-                                15,
-                                15
+                                18,
+                                18,
+                                18,
+                                18
                         )
                 )
         );
+
+
+        // =====================================================
+        // ICON
+        // =====================================================
+
+        JLabel iconLabel =
+                new JLabel(
+                        iconText
+                );
+
+        iconLabel.setHorizontalAlignment(
+                SwingConstants.CENTER
+        );
+
+        iconLabel.setVerticalAlignment(
+                SwingConstants.CENTER
+        );
+
+        iconLabel.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        23
+                )
+        );
+
+        iconLabel.setForeground(
+                PRIMARY_COLOR
+        );
+
+        iconLabel.setBackground(
+                PRIMARY_LIGHT
+        );
+
+        iconLabel.setOpaque(
+                true
+        );
+
+        iconLabel.setPreferredSize(
+                new Dimension(
+                        52,
+                        52
+                )
+        );
+
+
+        button.add(
+                iconLabel,
+                BorderLayout.WEST
+        );
+
+
+        // =====================================================
+        // TEXT
+        // =====================================================
+
+        JPanel textPanel =
+                new JPanel(
+                        new GridLayout(
+                                2,
+                                1,
+                                0,
+                                5
+                        )
+                );
+
+        textPanel.setOpaque(false);
 
 
         JLabel titleLabel =
@@ -585,12 +793,12 @@ public class DashboardFrame extends JFrame {
                 new Font(
                         "SansSerif",
                         Font.BOLD,
-                        19
+                        17
                 )
         );
 
         titleLabel.setForeground(
-                Color.BLACK
+                TEXT_COLOR
         );
 
 
@@ -603,30 +811,14 @@ public class DashboardFrame extends JFrame {
                 new Font(
                         "SansSerif",
                         Font.PLAIN,
-                        13
+                        12
                 )
         );
 
         descriptionLabel.setForeground(
-                new Color(
-                        70,
-                        70,
-                        70
-                )
+                SECONDARY_TEXT
         );
 
-
-        JPanel textPanel =
-                new JPanel(
-                        new GridLayout(
-                                2,
-                                1
-                        )
-                );
-
-        textPanel.setOpaque(
-                false
-        );
 
         textPanel.add(
                 titleLabel
@@ -640,6 +832,79 @@ public class DashboardFrame extends JFrame {
         button.add(
                 textPanel,
                 BorderLayout.CENTER
+        );
+
+
+        // =====================================================
+        // HOVER EFFECT
+        // =====================================================
+
+        button.addMouseListener(
+                new MouseAdapter() {
+
+                    @Override
+                    public void mouseEntered(
+                            MouseEvent e
+                    ) {
+
+                        button.setBackground(
+                                new Color(
+                                        238,
+                                        247,
+                                        250
+                                )
+                        );
+
+                        button.setBorder(
+                                BorderFactory.createCompoundBorder(
+                                        BorderFactory.createLineBorder(
+                                                PRIMARY_COLOR,
+                                                2
+                                        ),
+                                        new EmptyBorder(
+                                                17,
+                                                17,
+                                                17,
+                                                17
+                                        )
+                                )
+                        );
+
+                        iconLabel.setBackground(
+                                Color.WHITE
+                        );
+                    }
+
+
+                    @Override
+                    public void mouseExited(
+                            MouseEvent e
+                    ) {
+
+                        button.setBackground(
+                                CARD_COLOR
+                        );
+
+                        button.setBorder(
+                                BorderFactory.createCompoundBorder(
+                                        BorderFactory.createLineBorder(
+                                                BORDER_COLOR,
+                                                1
+                                        ),
+                                        new EmptyBorder(
+                                                18,
+                                                18,
+                                                18,
+                                                18
+                                        )
+                                )
+                        );
+
+                        iconLabel.setBackground(
+                                PRIMARY_LIGHT
+                        );
+                    }
+                }
         );
 
 
@@ -861,51 +1126,235 @@ public class DashboardFrame extends JFrame {
 
     private void showHelp() {
 
-        String helpText =
-                """
-                SUNRISE DENTAL CLINIC
-                SYSTEM HELP
-
-                1. Login
-                   Enter your authorized username and password.
-
-                2. Patient Management
-                   Register and manage patient information.
-
-                3. Appointments
-                   Register appointments and search appointment
-                   details using the appointment number.
-
-                4. Dentists
-                   View available dentists.
-
-                5. Treatments
-                   Register, view and manage treatment information.
-
-                6. Billing
-                   Calculate the treatment cost and consultation fee.
-
-                7. Reports
-                   View appointment, patient and billing reports.
-
-                8. Logout
-                   Safely return to the login screen.
-
-                9. Exit
-                   Close the application safely.
-                """;
-
-
-        JTextArea textArea =
-                new JTextArea(
-                        helpText
+        JDialog helpDialog =
+                new JDialog(
+                        this,
+                        "Sunrise Dental Clinic - Help & User Guide",
+                        true
                 );
 
-        textArea.setEditable(
-                false
+        helpDialog.setSize(
+                900,
+                700
         );
 
-        textArea.setFont(
+        helpDialog.setLocationRelativeTo(
+                this
+        );
+
+        helpDialog.setDefaultCloseOperation(
+                JDialog.DISPOSE_ON_CLOSE
+        );
+
+
+        // =====================================================
+        // MAIN HELP PANEL
+        // =====================================================
+
+        JPanel mainPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        mainPanel.setBackground(
+                BACKGROUND_COLOR
+        );
+
+
+        // =====================================================
+        // HELP HEADER
+        // =====================================================
+
+        JPanel headerPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        headerPanel.setBackground(
+                PRIMARY_COLOR
+        );
+
+        headerPanel.setBorder(
+                new EmptyBorder(
+                        22,
+                        30,
+                        22,
+                        30
+                )
+        );
+
+
+        JPanel headerText =
+                new JPanel(
+                        new GridLayout(
+                                2,
+                                1,
+                                0,
+                                4
+                        )
+                );
+
+        headerText.setOpaque(false);
+
+
+        JLabel titleLabel =
+                new JLabel(
+                        "Sunrise Dental Clinic"
+                );
+
+        titleLabel.setForeground(
+                Color.WHITE
+        );
+
+        titleLabel.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        25
+                )
+        );
+
+
+        JLabel subtitleLabel =
+                new JLabel(
+                        "Help & User Guide"
+                );
+
+        subtitleLabel.setForeground(
+                PRIMARY_LIGHT
+        );
+
+        subtitleLabel.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        15
+                )
+        );
+
+
+        headerText.add(
+                titleLabel
+        );
+
+        headerText.add(
+                subtitleLabel
+        );
+
+
+        headerPanel.add(
+                headerText,
+                BorderLayout.WEST
+        );
+
+
+        // =====================================================
+        // HELP ICON
+        // =====================================================
+
+        JLabel helpIcon =
+                new JLabel(
+                        "?"
+                );
+
+        helpIcon.setHorizontalAlignment(
+                SwingConstants.CENTER
+        );
+
+        helpIcon.setVerticalAlignment(
+                SwingConstants.CENTER
+        );
+
+        helpIcon.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        28
+                )
+        );
+
+        helpIcon.setForeground(
+                PRIMARY_COLOR
+        );
+
+        helpIcon.setBackground(
+                Color.WHITE
+        );
+
+        helpIcon.setOpaque(
+                true
+        );
+
+        helpIcon.setPreferredSize(
+                new Dimension(
+                        52,
+                        52
+                )
+        );
+
+
+        headerPanel.add(
+                helpIcon,
+                BorderLayout.EAST
+        );
+
+
+        mainPanel.add(
+                headerPanel,
+                BorderLayout.NORTH
+        );
+
+
+        // =====================================================
+        // INTRODUCTION
+        // =====================================================
+
+        JPanel introPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        introPanel.setBackground(
+                Color.WHITE
+        );
+
+        introPanel.setBorder(
+                new EmptyBorder(
+                        20,
+                        25,
+                        18,
+                        25
+                )
+        );
+
+
+        JLabel introTitle =
+                new JLabel(
+                        "How to use the system"
+                );
+
+        introTitle.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        20
+                )
+        );
+
+        introTitle.setForeground(
+                PRIMARY_COLOR
+        );
+
+
+        JLabel introText =
+                new JLabel(
+                        "<html>"
+                                + "Use this guide to understand the main functions "
+                                + "available in the Sunrise Dental Clinic Management System."
+                                + "</html>"
+                );
+
+        introText.setFont(
                 new Font(
                         "SansSerif",
                         Font.PLAIN,
@@ -913,51 +1362,421 @@ public class DashboardFrame extends JFrame {
                 )
         );
 
-        textArea.setForeground(
-                Color.BLACK
+        introText.setForeground(
+                SECONDARY_TEXT
         );
 
-        textArea.setBackground(
-                Color.WHITE
+
+        JPanel introContent =
+                new JPanel(
+                        new GridLayout(
+                                2,
+                                1,
+                                0,
+                                6
+                        )
+                );
+
+        introContent.setOpaque(false);
+
+        introContent.add(
+                introTitle
         );
 
-        textArea.setLineWrap(
-                true
+        introContent.add(
+                introText
         );
 
-        textArea.setWrapStyleWord(
-                true
+
+        introPanel.add(
+                introContent,
+                BorderLayout.CENTER
         );
 
-        textArea.setBorder(
-                new EmptyBorder(
-                        15,
-                        15,
-                        15,
-                        15
+
+        // =====================================================
+        // HELP CONTENT
+        // =====================================================
+
+        JPanel helpContent =
+                new JPanel();
+
+        helpContent.setLayout(
+                new BoxLayout(
+                        helpContent,
+                        BoxLayout.Y_AXIS
                 )
         );
 
+        helpContent.setBackground(
+                BACKGROUND_COLOR
+        );
+
+        helpContent.setBorder(
+                new EmptyBorder(
+                        10,
+                        25,
+                        20,
+                        25
+                )
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "1. Login",
+                        "Enter your authorized username and password "
+                                + "to access the system. Only registered users "
+                                + "can access the dashboard."
+                )
+        );
+
+        helpContent.add(
+                Box.createVerticalStrut(12)
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "2. Patient Management",
+                        "Use Patient Management to register new patients "
+                                + "and manage existing patient information."
+                )
+        );
+
+        helpContent.add(
+                Box.createVerticalStrut(12)
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "3. Appointments",
+                        "Use Appointments to register new appointments "
+                                + "and search for appointment information using "
+                                + "the appointment number."
+                )
+        );
+
+        helpContent.add(
+                Box.createVerticalStrut(12)
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "4. Dentists",
+                        "Use the Dentists section to view and manage "
+                                + "dentist information available at the clinic."
+                )
+        );
+
+        helpContent.add(
+                Box.createVerticalStrut(12)
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "5. Treatments",
+                        "Use Treatments to view and manage available "
+                                + "dental treatments and their information."
+                )
+        );
+
+        helpContent.add(
+                Box.createVerticalStrut(12)
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "6. Billing",
+                        "Use Billing to calculate treatment charges, "
+                                + "consultation fees and generate the patient's bill."
+                )
+        );
+
+        helpContent.add(
+                Box.createVerticalStrut(12)
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "7. Reports",
+                        "Use Reports to view relevant clinic information "
+                                + "such as appointments, patients and billing details."
+                )
+        );
+
+        helpContent.add(
+                Box.createVerticalStrut(12)
+        );
+
+
+        helpContent.add(
+                createHelpCard(
+                        "8. Logout",
+                        "Select Logout when you have finished using "
+                                + "the system. You will be safely returned "
+                                + "to the login screen."
+                )
+        );
+
+
+        // =====================================================
+        // SCROLL PANE
+        // =====================================================
 
         JScrollPane scrollPane =
                 new JScrollPane(
-                        textArea
+                        helpContent
                 );
 
-        scrollPane.setPreferredSize(
-                new Dimension(
-                        600,
-                        450
+        scrollPane.setBorder(
+                BorderFactory.createEmptyBorder()
+        );
+
+        scrollPane.setBackground(
+                BACKGROUND_COLOR
+        );
+
+        scrollPane.getVerticalScrollBar()
+                .setUnitIncrement(
+                        16
+                );
+
+
+        // =====================================================
+        // CENTER PANEL
+        // =====================================================
+
+        JPanel centerPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        centerPanel.setOpaque(false);
+
+        centerPanel.add(
+                introPanel,
+                BorderLayout.NORTH
+        );
+
+        centerPanel.add(
+                scrollPane,
+                BorderLayout.CENTER
+        );
+
+
+        mainPanel.add(
+                centerPanel,
+                BorderLayout.CENTER
+        );
+
+
+        // =====================================================
+        // HELP FOOTER
+        // =====================================================
+
+        JPanel footerPanel =
+                new JPanel(
+                        new FlowLayout(
+                                FlowLayout.RIGHT,
+                                20,
+                                12
+                        )
+                );
+
+        footerPanel.setBackground(
+                Color.WHITE
+        );
+
+
+        JButton closeButton =
+                new JButton(
+                        "Close"
+                );
+
+        closeButton.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        14
+                )
+        );
+
+        closeButton.setForeground(
+                Color.WHITE
+        );
+
+        closeButton.setBackground(
+                PRIMARY_COLOR
+        );
+
+        closeButton.setFocusPainted(
+                false
+        );
+
+        closeButton.setCursor(
+                new Cursor(
+                        Cursor.HAND_CURSOR
+                )
+        );
+
+        closeButton.setBorder(
+                BorderFactory.createEmptyBorder(
+                        10,
+                        28,
+                        10,
+                        28
                 )
         );
 
 
-        JOptionPane.showMessageDialog(
-                this,
-                scrollPane,
-                "System Help",
-                JOptionPane.INFORMATION_MESSAGE
+        closeButton.addActionListener(
+                e -> helpDialog.dispose()
         );
+
+
+        footerPanel.add(
+                closeButton
+        );
+
+
+        mainPanel.add(
+                footerPanel,
+                BorderLayout.SOUTH
+        );
+
+
+        helpDialog.setContentPane(
+                mainPanel
+        );
+
+        helpDialog.setVisible(
+                true
+        );
+    }
+
+
+    // =========================================================
+    // CREATE HELP CARD
+    // =========================================================
+
+    private JPanel createHelpCard(
+            String title,
+            String description
+    ) {
+
+        JPanel card =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        card.setBackground(
+                Color.WHITE
+        );
+
+
+        card.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                BORDER_COLOR,
+                                1
+                        ),
+                        new EmptyBorder(
+                                15,
+                                18,
+                                15,
+                                18
+                        )
+                )
+        );
+
+
+        card.setMaximumSize(
+                new Dimension(
+                        Integer.MAX_VALUE,
+                        100
+                )
+        );
+
+
+        JLabel titleLabel =
+                new JLabel(
+                        title
+                );
+
+        titleLabel.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.BOLD,
+                        16
+                )
+        );
+
+        titleLabel.setForeground(
+                PRIMARY_COLOR
+        );
+
+
+        JLabel descriptionLabel =
+                new JLabel(
+                        "<html>"
+                                + "<div style='width:700px;'>"
+                                + description
+                                + "</div>"
+                                + "</html>"
+                );
+
+        descriptionLabel.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        13
+                )
+        );
+
+        descriptionLabel.setForeground(
+                new Color(
+                        65,
+                        65,
+                        65
+                )
+        );
+
+
+        JPanel textPanel =
+                new JPanel(
+                        new GridLayout(
+                                2,
+                                1,
+                                0,
+                                6
+                        )
+                );
+
+        textPanel.setOpaque(false);
+
+
+        textPanel.add(
+                titleLabel
+        );
+
+        textPanel.add(
+                descriptionLabel
+        );
+
+
+        card.add(
+                textPanel,
+                BorderLayout.CENTER
+        );
+
+
+        return card;
     }
 
 
