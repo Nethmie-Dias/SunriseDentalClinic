@@ -105,6 +105,9 @@ public class AppointmentFrame extends JFrame {
     private static final Color BACKGROUND_COLOR =
             new Color(245, 249, 252);
 
+    private static final Color TEXT_COLOR =
+            new Color(35, 45, 55);
+
     // =========================================================
     // CONSTRUCTOR
     // =========================================================
@@ -180,7 +183,7 @@ public class AppointmentFrame extends JFrame {
 
         JLabel titleLabel =
                 new JLabel(
-                        "APPOINTMENT MANAGEMENT"
+                        "Appointment Management"
                 );
 
         titleLabel.setForeground(
@@ -220,7 +223,9 @@ public class AppointmentFrame extends JFrame {
                 new JPanel(
                         new GridLayout(
                                 2,
-                                1
+                                1,
+                                0,
+                                4
                         )
                 );
 
@@ -342,6 +347,14 @@ public class AppointmentFrame extends JFrame {
                 )
         );
 
+        footer.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        12
+                )
+        );
+
         mainPanel.add(
                 footer,
                 BorderLayout.SOUTH
@@ -374,7 +387,8 @@ public class AppointmentFrame extends JFrame {
                                         205,
                                         218,
                                         225
-                                )
+                                ),
+                                1
                         ),
                         new EmptyBorder(
                                 15,
@@ -398,7 +412,7 @@ public class AppointmentFrame extends JFrame {
                 new Font(
                         "SansSerif",
                         Font.BOLD,
-                        17
+                        18
                 )
         );
 
@@ -465,10 +479,14 @@ public class AppointmentFrame extends JFrame {
         appointmentNumberField =
                 new JTextField();
 
+        styleTextField(
+                appointmentNumberField
+        );
+
         appointmentNumberField.setPreferredSize(
                 new Dimension(
                         250,
-                        32
+                        34
                 )
         );
 
@@ -499,10 +517,14 @@ public class AppointmentFrame extends JFrame {
         patientComboBox =
                 new JComboBox<>();
 
+        styleComboBox(
+                patientComboBox
+        );
+
         patientComboBox.setPreferredSize(
                 new Dimension(
                         250,
-                        32
+                        34
                 )
         );
 
@@ -529,10 +551,14 @@ public class AppointmentFrame extends JFrame {
         dentistComboBox =
                 new JComboBox<>();
 
+        styleComboBox(
+                dentistComboBox
+        );
+
         dentistComboBox.setPreferredSize(
                 new Dimension(
                         250,
-                        32
+                        34
                 )
         );
 
@@ -559,10 +585,14 @@ public class AppointmentFrame extends JFrame {
         treatmentComboBox =
                 new JComboBox<>();
 
+        styleComboBox(
+                treatmentComboBox
+        );
+
         treatmentComboBox.setPreferredSize(
                 new Dimension(
                         250,
-                        32
+                        34
                 )
         );
 
@@ -589,10 +619,14 @@ public class AppointmentFrame extends JFrame {
         dateField =
                 new JTextField();
 
+        styleTextField(
+                dateField
+        );
+
         dateField.setPreferredSize(
                 new Dimension(
                         180,
-                        32
+                        34
                 )
         );
 
@@ -623,10 +657,14 @@ public class AppointmentFrame extends JFrame {
         timeField =
                 new JTextField();
 
+        styleTextField(
+                timeField
+        );
+
         timeField.setPreferredSize(
                 new Dimension(
                         180,
-                        32
+                        34
                 )
         );
 
@@ -659,6 +697,22 @@ public class AppointmentFrame extends JFrame {
                         3,
                         20
                 );
+
+        notesArea.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        13
+                )
+        );
+
+        notesArea.setForeground(
+                TEXT_COLOR
+        );
+
+        notesArea.setBackground(
+                Color.WHITE
+        );
 
         notesArea.setLineWrap(
                 true
@@ -696,7 +750,7 @@ public class AppointmentFrame extends JFrame {
                 new JPanel(
                         new FlowLayout(
                                 FlowLayout.CENTER,
-                                10,
+                                8,
                                 8
                         )
                 );
@@ -709,22 +763,14 @@ public class AppointmentFrame extends JFrame {
 
         JButton registerButton =
                 createButton(
-                        "REGISTER APPOINTMENT",
-                        SUCCESS_COLOR
+                        "Register Appointment",
+                        Color.WHITE
                 );
 
         registerButton.setPreferredSize(
                 new Dimension(
-                        220,
+                        190,
                         42
-                )
-        );
-
-        registerButton.setFont(
-                new Font(
-                        "SansSerif",
-                        Font.BOLD,
-                        13
                 )
         );
 
@@ -736,8 +782,8 @@ public class AppointmentFrame extends JFrame {
 
         JButton viewButton =
                 createButton(
-                        "VIEW",
-                        PRIMARY_COLOR
+                        "View",
+                        Color.WHITE
                 );
 
         viewButton.addActionListener(
@@ -748,8 +794,8 @@ public class AppointmentFrame extends JFrame {
 
         JButton updateButton =
                 createButton(
-                        "UPDATE",
-                        WARNING_COLOR
+                        "Update",
+                        Color.WHITE
                 );
 
         updateButton.addActionListener(
@@ -760,8 +806,8 @@ public class AppointmentFrame extends JFrame {
 
         JButton cancelButton =
                 createButton(
-                        "CANCEL",
-                        DANGER_COLOR
+                        "Cancel",
+                        Color.WHITE
                 );
 
         cancelButton.addActionListener(
@@ -772,12 +818,8 @@ public class AppointmentFrame extends JFrame {
 
         JButton clearButton =
                 createButton(
-                        "CLEAR",
-                        new Color(
-                                100,
-                                110,
-                                120
-                        )
+                        "Clear",
+                        Color.WHITE
                 );
 
         clearButton.addActionListener(
@@ -788,12 +830,24 @@ public class AppointmentFrame extends JFrame {
 
         JButton refreshButton =
                 createButton(
-                        "REFRESH",
-                        PRIMARY_DARK
+                        "Refresh",
+                        Color.WHITE
                 );
 
         refreshButton.addActionListener(
                 e -> loadAppointments()
+        );
+
+        // CLOSE
+
+        JButton closeButton =
+                createButton(
+                        "Close",
+                        Color.WHITE
+                );
+
+        closeButton.addActionListener(
+                e -> closeWindow()
         );
 
         buttonPanel.add(
@@ -818,6 +872,10 @@ public class AppointmentFrame extends JFrame {
 
         buttonPanel.add(
                 refreshButton
+        );
+
+        buttonPanel.add(
+                closeButton
         );
 
         gbc.gridx = 0;
@@ -887,10 +945,18 @@ public class AppointmentFrame extends JFrame {
                 )
         );
 
+        label.setForeground(
+                TEXT_COLOR
+        );
+
         searchField =
                 new JTextField(
                         22
                 );
+
+        styleTextField(
+                searchField
+        );
 
         searchField.setPreferredSize(
                 new Dimension(
@@ -905,8 +971,8 @@ public class AppointmentFrame extends JFrame {
 
         JButton searchButton =
                 createButton(
-                        "SEARCH",
-                        PRIMARY_COLOR
+                        "Search",
+                        Color.WHITE
                 );
 
         searchButton.setPreferredSize(
@@ -922,12 +988,8 @@ public class AppointmentFrame extends JFrame {
 
         JButton showAllButton =
                 createButton(
-                        "SHOW ALL",
-                        new Color(
-                                100,
-                                110,
-                                120
-                        )
+                        "Show All",
+                        Color.WHITE
                 );
 
         showAllButton.setPreferredSize(
@@ -1036,6 +1098,42 @@ public class AppointmentFrame extends JFrame {
                 true
         );
 
+        appointmentTable.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        13
+                )
+        );
+
+        appointmentTable.setForeground(
+                TEXT_COLOR
+        );
+
+        appointmentTable.setBackground(
+                Color.WHITE
+        );
+
+        appointmentTable.setGridColor(
+                new Color(
+                        220,
+                        228,
+                        233
+                )
+        );
+
+        appointmentTable.setSelectionBackground(
+                new Color(
+                        210,
+                        230,
+                        240
+                )
+        );
+
+        appointmentTable.setSelectionForeground(
+                TEXT_COLOR
+        );
+
         appointmentTable.getTableHeader()
                 .setReorderingAllowed(
                         false
@@ -1046,8 +1144,18 @@ public class AppointmentFrame extends JFrame {
                         new Font(
                                 "SansSerif",
                                 Font.BOLD,
-                                12
+                                13
                         )
+                );
+
+        appointmentTable.getTableHeader()
+                .setForeground(
+                        Color.WHITE
+                );
+
+        appointmentTable.getTableHeader()
+                .setBackground(
+                        PRIMARY_COLOR
                 );
 
         appointmentTable.addMouseListener(
@@ -1085,8 +1193,7 @@ public class AppointmentFrame extends JFrame {
     // CREATE BUTTON
     // =========================================================
 
-    private JButton
-    createButton(
+    private JButton createButton(
             String text,
             Color background
     ) {
@@ -1096,9 +1203,18 @@ public class AppointmentFrame extends JFrame {
                         text
                 );
 
-        button.setBackground(background);
+        // Same background for every button
 
-        button.setForeground(Color.BLACK);
+        button.setBackground(
+                Color.WHITE
+        );
+
+        // Clearly visible black text
+
+        button.setForeground(
+                Color.BLACK
+        );
+
         button.setFont(
                 new Font(
                         "SansSerif",
@@ -1107,14 +1223,24 @@ public class AppointmentFrame extends JFrame {
                 )
         );
 
-        button.setFocusPainted(false);
-        button.setOpaque(true);
-        button.setContentAreaFilled(true);
-        //remove default border
+        button.setFocusPainted(
+                false
+        );
+
+        button.setOpaque(
+                true
+        );
+
+        button.setContentAreaFilled(
+                true
+        );
+
+        // Black border
+
         button.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(
-                                background.darker(),
+                                Color.BLACK,
                                 1
                         ),
                         BorderFactory.createEmptyBorder(
@@ -1126,7 +1252,6 @@ public class AppointmentFrame extends JFrame {
                 )
         );
 
-
         button.setCursor(
                 new Cursor(
                         Cursor.HAND_CURSOR
@@ -1134,6 +1259,75 @@ public class AppointmentFrame extends JFrame {
         );
 
         return button;
+    }
+
+    // =========================================================
+    // TEXT FIELD STYLE
+    // =========================================================
+
+    private void styleTextField(
+            JTextField field
+    ) {
+
+        field.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        13
+                )
+        );
+
+        field.setForeground(
+                TEXT_COLOR
+        );
+
+        field.setBackground(
+                Color.WHITE
+        );
+
+        field.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(
+                                        190,
+                                        202,
+                                        210
+                                ),
+                                1
+                        ),
+                        BorderFactory.createEmptyBorder(
+                                5,
+                                8,
+                                5,
+                                8
+                        )
+                )
+        );
+    }
+
+    // =========================================================
+    // COMBO BOX STYLE
+    // =========================================================
+
+    private void styleComboBox(
+            JComboBox<?> comboBox
+    ) {
+
+        comboBox.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        13
+                )
+        );
+
+        comboBox.setForeground(
+                TEXT_COLOR
+        );
+
+        comboBox.setBackground(
+                Color.WHITE
+        );
     }
 
     // =========================================================
@@ -1257,14 +1451,6 @@ public class AppointmentFrame extends JFrame {
                 return;
             }
 
-            /*
-             * Accept:
-             *
-             * APT001
-             * APT0001
-             * APT-2026-00125
-             */
-
             if (
                     !appointmentNumber.matches(
                             "^APT(?:[0-9]{3,}|-[0-9]{4}-[0-9]{3,})$"
@@ -1289,13 +1475,6 @@ public class AppointmentFrame extends JFrame {
 
             try {
 
-                /*
-                 * We use the existing API search.
-                 *
-                 * If it finds the appointment,
-                 * the number already exists.
-                 */
-
                 Appointment existing =
                         apiClient.getAppointmentByNumber(
                                 appointmentNumber
@@ -1315,15 +1494,12 @@ public class AppointmentFrame extends JFrame {
 
             } catch (Exception ignored) {
 
-                /*
-                 * Appointment not found is acceptable.
-                 * The backend will perform the final validation.
-                 */
+                // Appointment not found is acceptable.
             }
 
             // -------------------------------------------------
             // PATIENT
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             Patient patient =
                     (Patient)
@@ -1341,7 +1517,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // DENTIST
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             Dentist dentist =
                     (Dentist)
@@ -1359,7 +1535,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // TREATMENT
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             Treatment treatment =
                     (Treatment)
@@ -1377,7 +1553,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // DATE
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             LocalDate appointmentDate =
                     parseDate();
@@ -1389,7 +1565,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // TIME
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             LocalTime appointmentTime =
                     parseTime();
@@ -1401,7 +1577,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // CLINIC TIME
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             if (
                     !isClinicTime(
@@ -1419,7 +1595,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // CREATE APPOINTMENT
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             Appointment appointment =
                     new Appointment();
@@ -1491,7 +1667,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // SEND TO SERVER
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             String message =
                     apiClient.addAppointment(
@@ -1500,7 +1676,7 @@ public class AppointmentFrame extends JFrame {
 
             // -------------------------------------------------
             // SUCCESS
-            // -------------------------------------------------
+            // -----------------------------------------------------
 
             JOptionPane.showMessageDialog(
                     this,
@@ -1570,25 +1746,13 @@ public class AppointmentFrame extends JFrame {
                 return;
             }
 
-            // -------------------------------------------------
-            // LOAD INTO FORM
-            // -------------------------------------------------
-
             loadAppointmentIntoForm(
                     appointment
             );
 
-            // -------------------------------------------------
-            // SELECT TABLE ROW
-            // -------------------------------------------------
-
             selectAppointmentInTable(
                     appointment.getAppointmentId()
             );
-
-            // -------------------------------------------------
-            // SHOW DETAILS
-            // -------------------------------------------------
 
             JTextArea details =
                     createAppointmentDetails(
@@ -2314,7 +2478,7 @@ public class AppointmentFrame extends JFrame {
             showError(
                     "Invalid date.\n\n"
                             + "Use YYYY-MM-DD.\n"
-                            + "Example: 2026-08-30"
+                            + "Example: 2026-09-15"
             );
 
             return null;
@@ -2397,7 +2561,7 @@ public class AppointmentFrame extends JFrame {
 
         String details =
                 """
-                APPOINTMENT DETAILS
+                Appointment Details
                 ================================
 
                 Appointment Number : %s
@@ -2476,6 +2640,14 @@ public class AppointmentFrame extends JFrame {
                 )
         );
 
+        textArea.setForeground(
+                TEXT_COLOR
+        );
+
+        textArea.setBackground(
+                Color.WHITE
+        );
+
         textArea.setBorder(
                 new EmptyBorder(
                         10,
@@ -2535,6 +2707,18 @@ public class AppointmentFrame extends JFrame {
     }
 
     // =========================================================
+    // CLOSE WINDOW
+    // =========================================================
+
+    private void closeWindow() {
+
+        // Close this frame and return to the
+        // dashboard that opened it.
+
+        dispose();
+    }
+
+    // =========================================================
     // LABEL
     // =========================================================
 
@@ -2569,6 +2753,10 @@ public class AppointmentFrame extends JFrame {
                         Font.BOLD,
                         13
                 )
+        );
+
+        label.setForeground(
+                TEXT_COLOR
         );
 
         panel.add(
