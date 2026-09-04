@@ -8,6 +8,10 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- ===================================================== -->
+    <!-- PROJECT INFORMATION                                  -->
+    <!-- ===================================================== -->
+
     <groupId>com.sunrise</groupId>
 
     <artifactId>sunrise-dental-backend</artifactId>
@@ -186,16 +190,39 @@
 
         </dependency>
 
+
+        <!-- ================================================= -->
+        <!-- JUNIT 5 TESTING                                  -->
+        <!-- ================================================= -->
+
+        <dependency>
+
+            <groupId>org.junit.jupiter</groupId>
+
+            <artifactId>junit-jupiter</artifactId>
+
+            <version>5.11.0</version>
+
+            <scope>test</scope>
+
+        </dependency>
+
+
     </dependencies>
 
 
     <!-- ===================================================== -->
-    <!-- MAVEN BUILD                                         -->
+    <!-- BUILD CONFIGURATION                                 -->
     <!-- ===================================================== -->
 
     <build>
 
         <plugins>
+
+
+            <!-- ============================================= -->
+            <!-- MAVEN COMPILER PLUGIN                        -->
+            <!-- ============================================= -->
 
             <plugin>
 
@@ -214,6 +241,22 @@
                 </configuration>
 
             </plugin>
+
+
+            <!-- ============================================= -->
+            <!-- JUNIT / MAVEN SUREFIRE PLUGIN                -->
+            <!-- ============================================= -->
+
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+
+                <artifactId>maven-surefire-plugin</artifactId>
+
+                <version>3.5.0</version>
+
+            </plugin>
+
 
         </plugins>
 
