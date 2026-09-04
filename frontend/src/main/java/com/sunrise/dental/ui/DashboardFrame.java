@@ -494,7 +494,7 @@ public class DashboardFrame extends JFrame {
                 createMenuButton(
                         "Help",
                         "System usage instructions",
-                        "?"
+                        "H"
                 );
 
         helpButton.addActionListener(
@@ -1249,12 +1249,12 @@ public class DashboardFrame extends JFrame {
 
 
         // =====================================================
-        // HELP ICON
+        // HELP ICON - H
         // =====================================================
 
         JLabel helpIcon =
                 new JLabel(
-                        "?"
+                        "H"
                 );
 
         helpIcon.setHorizontalAlignment(
@@ -1289,6 +1289,13 @@ public class DashboardFrame extends JFrame {
                 new Dimension(
                         52,
                         52
+                )
+        );
+
+        helpIcon.setBorder(
+                BorderFactory.createLineBorder(
+                        Color.WHITE,
+                        1
                 )
         );
 
@@ -1582,17 +1589,26 @@ public class DashboardFrame extends JFrame {
 
         JPanel footerPanel =
                 new JPanel(
-                        new FlowLayout(
-                                FlowLayout.RIGHT,
-                                20,
-                                12
-                        )
+                        new BorderLayout()
                 );
 
         footerPanel.setBackground(
                 Color.WHITE
         );
 
+        footerPanel.setBorder(
+                new EmptyBorder(
+                        12,
+                        20,
+                        12,
+                        20
+                )
+        );
+
+
+        // =====================================================
+        // CLOSE BUTTON
+        // =====================================================
 
         JButton closeButton =
                 new JButton(
@@ -1603,12 +1619,13 @@ public class DashboardFrame extends JFrame {
                 new Font(
                         "SansSerif",
                         Font.BOLD,
-                        14
+                        15
                 )
         );
 
+        // BLACK TEXT
         closeButton.setForeground(
-                Color.WHITE
+                Color.BLACK
         );
 
         closeButton.setBackground(
@@ -1619,19 +1636,79 @@ public class DashboardFrame extends JFrame {
                 false
         );
 
+        closeButton.setOpaque(
+                true
+        );
+
+        closeButton.setContentAreaFilled(
+                true
+        );
+
         closeButton.setCursor(
                 new Cursor(
                         Cursor.HAND_CURSOR
                 )
         );
 
+        // BLACK BORDER
         closeButton.setBorder(
-                BorderFactory.createEmptyBorder(
-                        10,
-                        28,
-                        10,
-                        28
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                Color.BLACK,
+                                2
+                        ),
+                        BorderFactory.createEmptyBorder(
+                                10,
+                                35,
+                                10,
+                                35
+                        )
                 )
+        );
+
+
+        // =====================================================
+        // CLOSE BUTTON HOVER EFFECT
+        // =====================================================
+
+        closeButton.addMouseListener(
+                new MouseAdapter() {
+
+                    @Override
+                    public void mouseEntered(
+                            MouseEvent e
+                    ) {
+
+                        closeButton.setBackground(
+                                new Color(
+                                        25,
+                                        72,
+                                        95
+                                )
+                        );
+
+                        // Keep text BLACK
+                        closeButton.setForeground(
+                                Color.BLACK
+                        );
+                    }
+
+
+                    @Override
+                    public void mouseExited(
+                            MouseEvent e
+                    ) {
+
+                        closeButton.setBackground(
+                                PRIMARY_COLOR
+                        );
+
+                        // Keep text BLACK
+                        closeButton.setForeground(
+                                Color.BLACK
+                        );
+                    }
+                }
         );
 
 
@@ -1641,7 +1718,8 @@ public class DashboardFrame extends JFrame {
 
 
         footerPanel.add(
-                closeButton
+                closeButton,
+                BorderLayout.EAST
         );
 
 
@@ -1650,6 +1728,10 @@ public class DashboardFrame extends JFrame {
                 BorderLayout.SOUTH
         );
 
+
+        // =====================================================
+        // SET HELP CONTENT
+        // =====================================================
 
         helpDialog.setContentPane(
                 mainPanel
